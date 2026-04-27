@@ -4,7 +4,7 @@ const OutpassRequest = require('../models/OutpassRequest');
 exports.getAssignedRequests = async (req, res) => {
     try {
         const mentorId = req.user.userId;
-        const requests = await OutpassRequest.find({ mentorId }).populate('studentId', 'name email');
+        const requests = (await OutpassRequest.find({ mentorId }).populate('userId', 'name email')).sort({ createdAt: -1 });
         res.json(requests);
     } catch (err) {
         console.error(err);

@@ -5,11 +5,11 @@ const studentRole = (req, res, next) => {
     next();
 };
 
-const teacherRole = (req, res, next) => {
+const adminRole = (req, res, next) => {
     if (req.user.role !== 'admin') {
-        return res.status(403).json({ message: 'Access denied: Teachers only' });
+        return res.status(403).json({ message: 'Access denied: Admins only' });
     }
     next();
 };
 
-module.exports = { studentRole, teacherRole };
+module.exports = { studentRole, adminRole };

@@ -1,4 +1,4 @@
-const Outpass = require('../models/Outpass');
+const OutpassRequest = require('../models/OutpassRequest');
 const User = require('../models/User');
 
 exports.createOutpassRequest = async (req, res) => {
@@ -15,7 +15,7 @@ exports.createOutpassRequest = async (req, res) => {
         const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
 
         // Count outpass requests for the current month for the student
-        const outpassCount = await Outpass.countDocuments({
+        const outpassCount = await OutpassRequest.countDocuments({
             studentId,
             createdAt: { $gte: startOfMonth, $lte: endOfMonth }
         });
@@ -47,7 +47,7 @@ exports.createOutpassRequest = async (req, res) => {
         }
 
         // Create new outpass request
-        const outpassRequest = new Outpass({
+        const outpassRequest = new OutpassRequest({
             studentId,
             mentorId,
             reason,
@@ -59,6 +59,17 @@ exports.createOutpassRequest = async (req, res) => {
         await outpassRequest.save();
 
         res.status(201).json({ message: 'Outpass request created successfully' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+exports.getOutpassRequests = async (req, res) => {
+    try {
+        const studentId = req.user.userId;
+        const requests = await OutpassRequest.find({ studentId }).sort({ createdAt: -1 });
+        res.json(requests);
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: 'Server error' });

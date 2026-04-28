@@ -37,6 +37,10 @@ const outpassRequestSchema = new mongoose.Schema({
         type: Date,
         default: null
     },
+    qrCode: {
+        type: String,
+        default: null
+    }
 }, { timestamps: true });
 
 const OutpassRequest = mongoose.model('OutpassRequest', outpassRequestSchema);

@@ -1,4 +1,5 @@
 const OutpassRequest = require('../models/OutpassRequest');
+const { generateQrCode } = require('../services/qrServices');
 
 // Assigned Requests
 exports.getAssignedRequests = async (req, res) => {
@@ -32,9 +33,21 @@ exports.approveRequest = async (req, res) => {
         request.status = 'approved';
         request.approvedBy = mentorId;
         request.approvedAt = new Date();
+
+        const payload = {
+            requestId: request._id.toString(),
+            studentId: request.studentId.toString(),
+            mentorId: request.mentorId.toString(),
+            validTill: request.toDate.toISOString(),
+            approvedAt: request.approvedAt.toISOString()
+        };
+
+        request.qrCode = await generateQrCode(payload);
         await request.save();
 
         res.json({ message: 'Request approved successfully' });
+
+        
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: 'Server error' });

@@ -1,5 +1,5 @@
 import react from 'react';
-import {View, Text, TextInput, Button, StyleSheet} from 'react-native';
+import {View, Text, TextInput, Button, StyleSheet, Alert} from 'react-native';
 import {AuthContext} from '../../context/AuthContext';
 import {useContext, useState} from 'react';
 
@@ -12,6 +12,8 @@ const LoginScreen = () => {
   const handleLogin = async () => {
     const result = await login(email, password);
     if (!result.success) {
+      console.error('Login failed:', result.message);
+      Alert.alert('Login Failed', result.message);
       setError(result.message);
     }
   };

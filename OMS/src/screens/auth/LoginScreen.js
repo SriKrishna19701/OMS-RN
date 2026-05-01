@@ -1,7 +1,6 @@
-import react from 'react';
+import React, { useContext, useState } from 'react';
 import {View, Text, TextInput, Button, StyleSheet, Alert} from 'react-native';
 import {AuthContext} from '../../context/AuthContext';
-import {useContext, useState} from 'react';
 
 const LoginScreen = () => {
   const {login, loading} = useContext(AuthContext);

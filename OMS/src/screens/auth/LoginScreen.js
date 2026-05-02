@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import {View, Text, TextInput, Button, StyleSheet, Alert} from 'react-native';
 import {AuthContext} from '../../context/AuthContext';
+import RegisterScreen from './RegisterScreen';
 
 const LoginScreen = () => {
   const {login, loading} = useContext(AuthContext);
@@ -37,6 +38,12 @@ const LoginScreen = () => {
         secureTextEntry
       />
       <Button title="Login" onPress={handleLogin} disabled={loading} />
+      <Text>
+        Don't have an account?{' '}
+        <Text style={styles.link} onPress={() => navigation.navigate("Register")}>
+          Register
+        </Text>
+      </Text>
     </View>
   );
 };
@@ -63,6 +70,10 @@ const styles = StyleSheet.create({
     color: 'red',
     marginBottom: 15,
     textAlign: 'center',
+  },
+  link: {
+    color: 'blue',
+    textDecorationLine: 'underline',
   },
 });
 

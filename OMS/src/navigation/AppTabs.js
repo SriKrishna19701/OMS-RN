@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AuthContext } from "../context/AuthContext";
 import UserHomeScreen from "../screens/user/Homescreen";
+import ApplyScreen from "../screens/user/ApplyScreen";
 import UserProfileScreen from "../screens/user/ProfileScreen";
 import UserHistoryScreen from "../screens/user/HistoryScreen";
 import AdminHomeScreen from "../screens/admin/Homescreen";
@@ -18,7 +19,8 @@ function UserTabs() {
       }}
     >
       <Tab.Screen name="Home" component={UserHomeScreen} />
-      <Tab.Screen name="Apply" component={UserHistoryScreen} />
+      <Tab.Screen name="Apply" component={ApplyScreen} />
+      <Tab.Screen name="History" component={UserHistoryScreen} />
       <Tab.Screen name="Profile" component={UserProfileScreen} />
     </Tab.Navigator>
   );

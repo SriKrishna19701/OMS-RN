@@ -1,9 +1,10 @@
 import React, { useContext, useState } from 'react';
 import {View, Text, TextInput, Button, StyleSheet, Alert} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import {AuthContext} from '../../context/AuthContext';
-import RegisterScreen from './RegisterScreen';
 
 const LoginScreen = () => {
+  const navigation = useNavigation();
   const {login, loading} = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

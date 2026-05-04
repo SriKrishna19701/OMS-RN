@@ -2,7 +2,7 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const api = axios.create({
-  baseURL: 'http://192.168.0.109:5000', // Adjust the base URL as needed
+  baseURL: 'http://localhost:5000', // Uses ADB reverse port forwarding
 });
 
 // Request interceptor to add the auth token to each request

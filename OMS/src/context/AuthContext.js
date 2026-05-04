@@ -12,9 +12,10 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     try {
       const response = await api.post('/api/auth/login', { email, password });
-      const { token } = response.data;
+      const { token, user: userData } = response.data;
       await AsyncStorage.setItem('authToken', token);
-      // Note: Backend returns only token, user state will be populated after fetching user details
+      await AsyncStorage.setItem('user', JSON.stringify(userData));
+      setUser(userData);
       return { success: true };
     } catch (error) {
       console.error('Login error:', error);

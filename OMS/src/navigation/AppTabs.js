@@ -1,20 +1,45 @@
-import React from "react";
+import React, { useContext } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import LoginScreen from "../screens/auth/LoginScreen";
-import { View,Text } from "react-native";
+import { AuthContext } from "../context/AuthContext";
+import UserHomeScreen from "../screens/user/Homescreen";
+import UserProfileScreen from "../screens/user/ProfileScreen";
+import UserHistoryScreen from "../screens/user/HistoryScreen";
+import AdminHomeScreen from "../screens/admin/Homescreen";
+import AdminProfileScreen from "../screens/admin/ProfileScreen";
+import AdminHistoryScreen from "../screens/admin/HistoryScreen";
 
 const Tab = createBottomTabNavigator();
 
-const Home = () => <View><Text>Home</Text></View>
-const Profile = () => <View><Text>Profile</Text></View>
-const History = () => <View><Text>History</Text></View>
-
-export  default function AppTabs() {
+function UserTabs() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Profile" component={Profile} />
-      <Tab.Screen name="History" component={History} />
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: true,
+      }}
+    >
+      <Tab.Screen name="Home" component={UserHomeScreen} />
+      <Tab.Screen name="Apply" component={UserHistoryScreen} />
+      <Tab.Screen name="Profile" component={UserProfileScreen} />
     </Tab.Navigator>
   );
+}
+
+function AdminTabs() {
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: true,
+      }}
+    >
+      <Tab.Screen name="Requests" component={AdminHomeScreen} />
+      <Tab.Screen name="History" component={AdminHistoryScreen} />
+      <Tab.Screen name="Profile" component={AdminProfileScreen} />
+    </Tab.Navigator>
+  );
+}
+
+export default function AppTabs() {
+  const { user } = useContext(AuthContext);
+  
+  return user?.role === "admin" ? <AdminTabs /> : <UserTabs />;
 }

@@ -7,7 +7,7 @@ const HomeScreen = () => {
 
     const fetchRequests = async () => {
         try {
-            const response = await API.get('/outpass/my');
+            const response = await API.get('/api/user/outpass');
             setRequests(response.data);
         } catch (error) {
             console.error('Error fetching requests:', error);

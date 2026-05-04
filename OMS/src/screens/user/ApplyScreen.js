@@ -9,7 +9,7 @@ const applyScreen = () => {
 
     const handleApply = async () => {
         try {
-            await API.post('/outpass/apply', { reason, fromDate, toDate });
+            await API.post('/api/user/apply', { reason, fromDate, toDate });
             navigation.goBack();
         } catch (error) {
             console.error('Error submitting request:', error);

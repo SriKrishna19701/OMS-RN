@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { AuthContext } from "../context/AuthContext";
 import UserHomeScreen from "../screens/user/Homescreen";
 import ApplyScreen from "../screens/user/ApplyScreen";
@@ -9,18 +9,27 @@ import AdminHomeScreen from "../screens/admin/Homescreen";
 import AdminProfileScreen from "../screens/admin/ProfileScreen";
 import AdminHistoryScreen from "../screens/admin/HistoryScreen";
 
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialTopTabNavigator();
 
 function UserTabs() {
   return (
     <Tab.Navigator
+      tabBarPosition="bottom"
       screenOptions={{
-        headerShown: false,
-        animation: 'shift',
+        tabBarIndicatorStyle: { height: 0 },
+        tabBarStyle: { 
+          backgroundColor: '#FFF', 
+          borderTopWidth: 1, 
+          borderTopColor: '#E2E8F0',
+          height: 60,
+          paddingBottom: 5
+        },
+        tabBarActiveTintColor: '#4B6396',
+        tabBarInactiveTintColor: '#718096',
+        tabBarLabelStyle: { fontSize: 12, fontWeight: '600' },
       }}
     >
       <Tab.Screen name="Home" component={UserHomeScreen} />
-      <Tab.Screen name="Apply" component={ApplyScreen} />
       <Tab.Screen name="History" component={UserHistoryScreen} />
       <Tab.Screen name="Profile" component={UserProfileScreen} />
     </Tab.Navigator>
@@ -30,9 +39,19 @@ function UserTabs() {
 function AdminTabs() {
   return (
     <Tab.Navigator
+      tabBarPosition="bottom"
       screenOptions={{
-        headerShown: false,
-        animation: 'shift',
+        tabBarIndicatorStyle: { height: 0 },
+        tabBarStyle: { 
+          backgroundColor: '#FFF', 
+          borderTopWidth: 1, 
+          borderTopColor: '#E2E8F0',
+          height: 60,
+          paddingBottom: 5
+        },
+        tabBarActiveTintColor: '#4B6396',
+        tabBarInactiveTintColor: '#718096',
+        tabBarLabelStyle: { fontSize: 12, fontWeight: '600' },
       }}
     >
       <Tab.Screen name="Requests" component={AdminHomeScreen} />

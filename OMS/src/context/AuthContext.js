@@ -19,7 +19,19 @@ export const AuthProvider = ({ children }) => {
       return { success: true };
     } catch (error) {
       console.error('Login error:', error);
-      return { success: false, message: error.response?.data?.message || 'An error occurred' };
+      if (error.response) {
+        // Server responded with a status code outside the 2xx range
+        console.error('Error response data:', error.response.data);
+        return { success: false, message: error.response.data.message || 'Server error' };
+      } else if (error.request) {
+        // Request was made but no response was received
+        console.error('Error request:', error.request);
+        return { success: false, message: 'Network error. Please check if the backend is running and ADB reverse is set up.' };
+      } else {
+        // Something happened in setting up the request
+        console.error('Error message:', error.message);
+        return { success: false, message: error.message || 'An error occurred' };
+      }
     } finally {
       setLoading(false);
     }

@@ -42,7 +42,7 @@ const HomeScreen = () => {
     return (
         <SafeAreaView style={styles.safeArea}>
             <View style={styles.header}>
-                <View style={styles.menuIcon}><Text style={{fontSize:20, color:'#4B6396'}}>≡</Text></View>
+                <View style={{width: 40}} />
                 <Text style={styles.headerBrand}>OMS</Text>
                 <View style={styles.avatarPlaceholder}><Text style={{fontSize: 14, color: '#4B6396', fontWeight: 'bold'}}>A</Text></View>
             </View>

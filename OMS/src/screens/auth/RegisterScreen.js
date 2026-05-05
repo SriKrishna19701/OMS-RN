@@ -28,10 +28,8 @@ const RegisterScreen = ({ navigation }) => {
           >
             <ScrollView contentContainerStyle={styles.scrollContent}>
               <View style={styles.logoContainer}>
-                <View style={styles.iconWrapper}>
-                  <Text style={styles.lockIcon}>📝</Text>
-                </View>
-                <Text style={styles.brandTitle}>PassFlow</Text>
+
+                <Text style={styles.brandTitle}>OMS</Text>
                 <Text style={styles.subtitle}>Request institutional access</Text>
               </View>
 
@@ -41,7 +39,7 @@ const RegisterScreen = ({ navigation }) => {
                 <View style={styles.inputGroup}>
                   <Text style={styles.label}>Full Name</Text>
                   <View style={styles.inputContainer}>
-                    <Text style={styles.inputIcon}>👤</Text>
+
                     <TextInput
                       style={styles.input}
                       placeholder="John Doe"
@@ -71,7 +69,7 @@ const RegisterScreen = ({ navigation }) => {
                 <View style={styles.inputGroup}>
                   <Text style={styles.label}>Password</Text>
                   <View style={styles.inputContainer}>
-                    <Text style={[styles.inputIcon, { fontSize: 14, transform: [{ rotate: '45deg' }] }]}>🗝</Text>
+
                     <TextInput
                       style={styles.input}
                       placeholder="••••••••"

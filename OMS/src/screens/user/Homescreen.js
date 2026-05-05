@@ -35,8 +35,8 @@ const HomeScreen = ({ navigation }) => {
             <ScrollView contentContainerStyle={styles.container}>
                 <View style={styles.header}>
                     <View style={styles.menuIcon}><Text style={{fontSize:20, color:'#4B6396'}}>≡</Text></View>
-                    <Text style={styles.headerBrand}>PassFlow</Text>
-                    <View style={styles.avatarPlaceholder}><Text style={{fontSize: 14}}>👤</Text></View>
+                    <Text style={styles.headerBrand}>OMS</Text>
+                    <View style={styles.avatarPlaceholder}><Text style={{fontSize: 14, color: '#4B6396', fontWeight: 'bold'}}>{user?.name?.charAt(0).toUpperCase() || 'U'}</Text></View>
                 </View>
 
                 <Text style={styles.greeting}>Hello, {user?.name?.split(' ')[0] || 'Student'}</Text>
@@ -63,7 +63,7 @@ const HomeScreen = ({ navigation }) => {
                     <View style={styles.activeCard}>
                         <View style={styles.activeHeader}>
                             <View style={styles.activeBadge}><Text style={styles.activeBadgeText}>ACTIVE OUTPASS</Text></View>
-                            <Text>✔️</Text>
+
                         </View>
                         <Text style={styles.activeTitle}>{activeRequest.reason}</Text>
                         
@@ -80,7 +80,7 @@ const HomeScreen = ({ navigation }) => {
                         
                         <View style={styles.qrContainer}>
                             <Text style={styles.qrInstructions}>Present this QR code at the main security gate for digital verification.</Text>
-                            <View style={styles.qrBox}><Text style={{fontSize: 30}}>▣ ▣</Text></View>
+                            <View style={styles.qrBox}><Text style={{fontSize: 16, color: '#A0ABC0', fontWeight: 'bold'}}>QR</Text></View>
                         </View>
                     </View>
                 )}
@@ -91,7 +91,7 @@ const HomeScreen = ({ navigation }) => {
                 ) : (
                     requests.slice(0, 3).map((req, idx) => (
                         <View key={idx} style={styles.recentItem}>
-                            <View style={styles.recentIcon}><Text>📍</Text></View>
+                            <View style={styles.recentIcon} />
                             <View style={{flex: 1}}>
                                 <Text style={styles.recentReason}>{req.reason}</Text>
                                 <Text style={styles.recentDate}>Requested for: {new Date(req.fromDate).toLocaleDateString()}</Text>

@@ -26,7 +26,7 @@ const ApplyScreen = () => {
                 <ScrollView contentContainerStyle={styles.container}>
                     <View style={styles.header}>
                         <View style={styles.menuIcon}><Text style={{fontSize:20, color:'#4B6396'}}>≡</Text></View>
-                        <Text style={styles.headerBrand}>PassFlow</Text>
+                        <Text style={styles.headerBrand}>OMS</Text>
                         <View style={{width: 40}} />
                     </View>
 
@@ -81,7 +81,7 @@ const ApplyScreen = () => {
                     </View>
 
                     <View style={styles.infoCard}>
-                        <View style={styles.infoIconBox}><Text>⏱️</Text></View>
+                        <View style={styles.infoIconBox} />
                         <View>
                             <Text style={styles.infoTitle}>Standard Processing</Text>
                             <Text style={styles.infoSubtitle}>Typically approved within 2 hours</Text>

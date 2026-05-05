@@ -15,7 +15,8 @@ function UserTabs() {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerShown: true,
+        headerShown: false,
+        animation: 'shift',
       }}
     >
       <Tab.Screen name="Home" component={UserHomeScreen} />
@@ -30,7 +31,8 @@ function AdminTabs() {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerShown: true,
+        headerShown: false,
+        animation: 'shift',
       }}
     >
       <Tab.Screen name="Requests" component={AdminHomeScreen} />

@@ -33,8 +33,8 @@ const HistoryScreen = () => {
         <SafeAreaView style={styles.safeArea}>
             <View style={styles.header}>
               <View style={styles.menuIcon}><Text style={{fontSize:20, color:'#4B6396'}}>≡</Text></View>
-              <Text style={styles.headerBrand}>PassFlow</Text>
-              <View style={styles.avatarPlaceholder}><Text style={{fontSize: 14}}>👮</Text></View>
+              <Text style={styles.headerBrand}>OMS</Text>
+              <View style={styles.avatarPlaceholder}><Text style={{fontSize: 14, color: '#4B6396', fontWeight: 'bold'}}>A</Text></View>
             </View>
 
             <View style={styles.container}>
@@ -50,7 +50,7 @@ const HistoryScreen = () => {
                         return (
                             <View style={styles.requestCard}>
                                 <View style={styles.cardHeader}>
-                                    <View style={styles.iconBox}><Text>📍</Text></View>
+                                    <View style={styles.iconBox} />
                                     <View style={styles.reasonContainer}>
                                         <Text style={styles.reasonText}>{item.reason || 'No Reason'}</Text>
                                         <View style={[styles.statusBadge, { backgroundColor: statusColor.bg }]}>

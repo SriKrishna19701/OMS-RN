@@ -43,8 +43,8 @@ const HomeScreen = () => {
         <SafeAreaView style={styles.safeArea}>
             <View style={styles.header}>
                 <View style={styles.menuIcon}><Text style={{fontSize:20, color:'#4B6396'}}>≡</Text></View>
-                <Text style={styles.headerBrand}>PassFlow</Text>
-                <View style={styles.avatarPlaceholder}><Text style={{fontSize: 14}}>👮</Text></View>
+                <Text style={styles.headerBrand}>OMS</Text>
+                <View style={styles.avatarPlaceholder}><Text style={{fontSize: 14, color: '#4B6396', fontWeight: 'bold'}}>A</Text></View>
             </View>
 
             <View style={styles.container}>
@@ -53,12 +53,12 @@ const HomeScreen = () => {
 
                 <View style={styles.statsContainer}>
                     <View style={styles.statSquare}>
-                        <View style={styles.statIcon}><Text>📋</Text></View>
+
                         <Text style={styles.statLabel}>QUEUE</Text>
                         <Text style={styles.statValue}>{requests.length}</Text>
                     </View>
                     <View style={[styles.statSquare, { backgroundColor: '#E9D5FF' }]}>
-                        <View style={styles.statIcon}><Text>🛡️</Text></View>
+
                         <Text style={styles.statLabel}>ACCOUNTS</Text>
                         <Text style={styles.statValue}>12</Text>
                     </View>
@@ -71,7 +71,7 @@ const HomeScreen = () => {
                     renderItem={({ item }) => (
                         <View style={styles.requestCard}>
                             <View style={styles.cardHeader}>
-                                <View style={styles.userAvatar}><Text>👤</Text></View>
+                                <View style={styles.userAvatar}><Text style={{color: '#4B6396', fontWeight: 'bold'}}>S</Text></View>
                                 <View style={styles.userInfo}>
                                     <Text style={styles.userName}>{item.reason || 'Student Request'}</Text>
                                     <Text style={styles.userMeta}>ID: ...{item._id?.substring?.(item._id.length - 4)}</Text>
@@ -103,7 +103,7 @@ const HomeScreen = () => {
                     )}
                     ListEmptyComponent={
                         <View style={styles.emptyQueue}>
-                            <Text style={styles.emptyQueueIcon}>♾️</Text>
+
                             <Text style={styles.emptyQueueText}>You've reached the end of the queue for now.</Text>
                         </View>
                     }

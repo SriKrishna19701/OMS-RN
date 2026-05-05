@@ -27,10 +27,8 @@ const LoginScreen = () => {
       >
         <ScrollView contentContainerStyle={styles.scrollContent}>
           <View style={styles.logoContainer}>
-            <View style={styles.iconWrapper}>
-              <Text style={styles.lockIcon}>🔓</Text>
-            </View>
-            <Text style={styles.brandTitle}>PassFlow</Text>
+
+            <Text style={styles.brandTitle}>OMS</Text>
             <Text style={styles.subtitle}>Access your institutional portal</Text>
           </View>
 
@@ -56,12 +54,9 @@ const LoginScreen = () => {
             <View style={styles.inputGroup}>
               <View style={styles.passwordHeader}>
                 <Text style={styles.label}>Password</Text>
-                <TouchableOpacity>
-                  <Text style={styles.forgotPassword}>Forgot Password?</Text>
-                </TouchableOpacity>
               </View>
               <View style={styles.inputContainer}>
-                <Text style={[styles.inputIcon, { fontSize: 14, transform: [{ rotate: '45deg' }] }]}>🗝</Text>
+
                 <TextInput
                   style={styles.input}
                   placeholder="••••••••"
@@ -81,15 +76,8 @@ const LoginScreen = () => {
               <Text style={styles.loginButtonText}>Sign In to Dashboard</Text>
             </TouchableOpacity>
 
-            <View style={styles.divider} />
-
-            <View style={styles.registerPrompt}>
-              <Text style={styles.registerText}>New to PassFlow? </Text>
-              <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-                <Text style={styles.registerLink}>Request institutional access</Text>
-              </TouchableOpacity>
-            </View>
           </View>
+
 
           <View style={styles.footer}>
             <View style={styles.badge}><Text style={styles.badgeText}>SECURITY+</Text></View>

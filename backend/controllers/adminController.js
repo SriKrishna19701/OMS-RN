@@ -1,15 +1,32 @@
 const OutpassRequest = require('../models/OutpassRequest');
+const User = require('../models/User');
 const { generateQrCode } = require('../services/qrServices');
+
+// Get Count of Mentored Students
+exports.getMentoredStudentsCount = async (req, res) => {
+    try {
+        const mentorId = req.user.userId;
+        console.log('Fetching count for mentorId:', mentorId);
+        const count = await User.countDocuments({ mentorId, role: 'student' });
+        console.log('Count Success:', count);
+        res.json({ count });
+    } catch (err) {
+        console.error('Count Error:', err);
+        res.status(500).json({ message: 'Server error: ' + err.message });
+    }
+};
 
 // Assigned Requests
 exports.getAssignedRequests = async (req, res) => {
     try {
         const mentorId = req.user.userId;
-        const requests = (await OutpassRequest.find({ mentorId }).populate('userId', 'name email')).sort({ createdAt: -1 });
+        console.log('Fetching requests for mentorId:', mentorId);
+        const requests = await OutpassRequest.find({ mentorId }).populate('studentId', 'name email').sort({ createdAt: -1 });
+        console.log('Requests Success:', requests.length);
         res.json(requests);
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: 'Server error' });
+        console.error('Requests Error:', err);
+        res.status(500).json({ message: 'Server error: ' + err.message });
     }
 };
 

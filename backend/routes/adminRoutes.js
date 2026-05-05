@@ -8,6 +8,7 @@ router.use(authMiddleware);
 router.use(adminRole);
 
 router.get('/requests', adminController.getAssignedRequests);
+router.get('/students/count', adminController.getMentoredStudentsCount);
 router.put('/requests/:id/approve', adminController.approveRequest);
 router.put('/requests/:id/reject', adminController.rejectRequest);
 

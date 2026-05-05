@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, ScrollView, StyleSheet, SafeAreaView } fr
 import { AuthContext } from '../../context/AuthContext';
 import API from '../../services/api';
 
-const HomeScreen = ({ navigation }) => {
+const UserHomeScreen = ({ navigation }) => {
     const [requests, setRequests] = useState([]);
     const { user } = useContext(AuthContext);
 
@@ -34,8 +34,6 @@ const HomeScreen = ({ navigation }) => {
         <SafeAreaView style={styles.safeArea}>
             <ScrollView contentContainerStyle={styles.container}>
                 <View style={styles.header}>
-                    <View style={{width: 40}} />
-                    <Text style={styles.headerBrand}>OMS</Text>
                     <View style={styles.avatarPlaceholder}><Text style={{fontSize: 14, color: '#4B6396', fontWeight: 'bold'}}>{user?.name?.charAt(0).toUpperCase() || 'U'}</Text></View>
                 </View>
 
@@ -54,7 +52,7 @@ const HomeScreen = ({ navigation }) => {
                     </View>
                 </View>
 
-                <TouchableOpacity style={styles.applyBtn} onPress={() => navigation.navigate("Apply") || navigation.navigate("ApplyScreen")}>
+                <TouchableOpacity style={styles.applyBtn} onPress={() => navigation.navigate("Apply")}>
                     <Text style={styles.applyBtnText}>Apply for New Pass</Text>
                     <Text style={{color: '#FFF'}}>→</Text>
                 </TouchableOpacity>
@@ -106,8 +104,8 @@ const HomeScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     safeArea: { flex: 1, backgroundColor: '#F8F9FE' },
-    container: { padding: 24, paddingBottom: 40 },
-    header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 32, paddingTop: 16 },
+    container: { padding: 24, paddingTop: 0, paddingBottom: 40 },
+    header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', marginBottom: 0, paddingTop: 12 },
     headerBrand: { fontSize: 20, fontWeight: '700', color: '#4B6396' },
     avatarPlaceholder: { width: 32, height: 32, backgroundColor: '#E2E8F0', borderRadius: 16, justifyContent: 'center', alignItems: 'center' },
     greeting: { fontSize: 32, fontWeight: '700', color: '#2D3748', marginBottom: 8 },
@@ -141,4 +139,4 @@ const styles = StyleSheet.create({
     noHistory: { fontSize: 15, color: '#A0ABC0', fontStyle: 'italic', marginTop: 8 }
 });
 
-export default HomeScreen;
+export default UserHomeScreen;

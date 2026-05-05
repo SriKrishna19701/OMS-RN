@@ -1,22 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, SafeAreaView, Alert } from 'react-native';
 import API from '../../services/api';
+import { AuthContext } from '../../context/AuthContext';
 
-const HomeScreen = () => {
+const AdminHomeScreen = () => {
     const [requests, setRequests] = useState([]);
+    const [studentCount, setStudentCount] = useState(0);
+    const { user } = useContext(AuthContext);
 
-    const fetchRequests = async () => {
+    const fetchDashboardData = async () => {
         try {
-            const response = await API.get('/api/admin/requests');
-            setRequests(response.data);
+            const [requestsRes, countRes] = await Promise.all([
+                API.get('/api/admin/requests'),
+                API.get('/api/admin/students/count')
+            ]);
+            
+            if (requestsRes.data) {
+                setRequests(requestsRes.data.filter(r => r.status === 'pending'));
+            }
+            if (countRes.data) {
+                setStudentCount(countRes.data.count);
+            }
         } catch (error) {
-            console.error('Error fetching requests:', error);
-            Alert.alert('Error', 'Failed to load requests');
+            console.error('Error fetching dashboard data:', error);
+            Alert.alert('Error', 'Failed to load dashboard data');
         }
     };
 
     useEffect(() => {
-        fetchRequests();
+        fetchDashboardData();
     }, []);
 
     const approve = async (id) => {
@@ -42,9 +54,7 @@ const HomeScreen = () => {
     return (
         <SafeAreaView style={styles.safeArea}>
             <View style={styles.header}>
-                <View style={{width: 40}} />
-                <Text style={styles.headerBrand}>OMS</Text>
-                <View style={styles.avatarPlaceholder}><Text style={{fontSize: 14, color: '#4B6396', fontWeight: 'bold'}}>A</Text></View>
+                <View style={styles.avatarPlaceholder}><Text style={{ fontSize: 14, color: '#4B6396', fontWeight: 'bold' }}>{user?.name?.charAt(0).toUpperCase() || 'A'}</Text></View>
             </View>
 
             <View style={styles.container}>
@@ -60,24 +70,24 @@ const HomeScreen = () => {
                     <View style={[styles.statSquare, { backgroundColor: '#E9D5FF' }]}>
 
                         <Text style={styles.statLabel}>ACCOUNTS</Text>
-                        <Text style={styles.statValue}>12</Text>
+                        <Text style={styles.statValue}>{studentCount}</Text>
                     </View>
                 </View>
 
                 <FlatList
                     data={requests}
-                    keyExtractor={(item) => item._id.toString()}
+                    keyExtractor={(item) => item._id?.toString() || Math.random().toString()}
                     contentContainerStyle={{ paddingBottom: 40 }}
                     renderItem={({ item }) => (
                         <View style={styles.requestCard}>
                             <View style={styles.cardHeader}>
-                                <View style={styles.userAvatar}><Text style={{color: '#4B6396', fontWeight: 'bold'}}>S</Text></View>
+                                <View style={styles.userAvatar}><Text style={{ color: '#4B6396', fontWeight: 'bold' }}>S</Text></View>
                                 <View style={styles.userInfo}>
                                     <Text style={styles.userName}>{item.reason || 'Student Request'}</Text>
                                     <Text style={styles.userMeta}>ID: ...{item._id?.substring?.(item._id.length - 4)}</Text>
                                 </View>
                             </View>
-                            
+
                             <View style={styles.detailsRow}>
                                 <View style={styles.detailBox}>
                                     <Text style={styles.detailLabel}>PURPOSE</Text>
@@ -115,8 +125,7 @@ const HomeScreen = () => {
 
 const styles = StyleSheet.create({
     safeArea: { flex: 1, backgroundColor: '#F8F9FE' },
-    header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 24, paddingTop: 16, paddingBottom: 8 },
-    menuIcon: { width: 40, height: 40, justifyContent: 'center', alignItems: 'flex-start' },
+    header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', paddingHorizontal: 24, paddingTop: 12, paddingBottom: 4, marginBottom: 0 },
     headerBrand: { fontSize: 20, fontWeight: '700', color: '#4B6396' },
     avatarPlaceholder: { width: 32, height: 32, backgroundColor: '#E2E8F0', borderRadius: 16, justifyContent: 'center', alignItems: 'center' },
     container: { flex: 1, paddingHorizontal: 24, paddingTop: 16 },
@@ -147,4 +156,4 @@ const styles = StyleSheet.create({
     emptyQueueText: { fontSize: 14, color: '#718096', textAlign: 'center' }
 });
 
-export default HomeScreen;
+export default AdminHomeScreen;

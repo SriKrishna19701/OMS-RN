@@ -8,8 +8,6 @@ const ProfileScreen = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
         <View style={styles.header}>
-            <View style={{width: 40}} />
-            <Text style={styles.headerBrand}>OMS</Text>
             <View style={styles.avatarPlaceholder}><Text style={{fontSize: 14, color: '#4B6396', fontWeight: 'bold'}}>{user?.name?.charAt(0).toUpperCase() || 'U'}</Text></View>
         </View>
 
@@ -20,7 +18,7 @@ const ProfileScreen = () => {
             <View style={styles.card}>
                 <View style={styles.profileHeader}>
                     <View style={styles.largeAvatar}><Text style={{fontSize: 40, color: '#4B6396', fontWeight: 'bold'}}>{user?.name?.charAt(0).toUpperCase() || 'U'}</Text></View>
-                    <Text style={styles.name}>{user.name}</Text>
+                    <Text style={styles.name}>{user?.name || 'Loading...'}</Text>
                     <Text style={styles.role}>{user?.role?.toUpperCase() || 'STUDENT'}</Text>
                 </View>
                 
@@ -29,7 +27,7 @@ const ProfileScreen = () => {
                 <View style={styles.infoRow}>
                     <Text style={styles.label}>Email Address</Text>
                     <View style={styles.inputContainer}>
-                        <Text style={styles.input}>{user.email}</Text>
+                        <Text style={styles.input}>{user?.email || 'N/A'}</Text>
                     </View>
                 </View>
 
@@ -50,10 +48,11 @@ const styles = StyleSheet.create({
   header: {
       flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'space-between',
+      justifyContent: 'flex-end',
       paddingHorizontal: 24,
-      paddingTop: 16,
-      paddingBottom: 8,
+      paddingTop: 12,
+      paddingBottom: 4,
+      marginBottom: 0,
   },
   menuIcon: {
       width: 40,

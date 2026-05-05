@@ -1,9 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import { View, Text, FlatList, StyleSheet, SafeAreaView } from 'react-native';
 import API from '../../services/api';
+import { AuthContext } from '../../context/AuthContext';
 
 const HistoryScreen = () => {
     const [requests, setRequests] = useState([]);
+    const { user } = useContext(AuthContext);
 
     const fetchRequests = async () => {
         try {
@@ -32,9 +34,7 @@ const HistoryScreen = () => {
     return (
         <SafeAreaView style={styles.safeArea}>
             <View style={styles.header}>
-              <View style={{width: 40}} />
-              <Text style={styles.headerBrand}>OMS</Text>
-              <View style={styles.avatarPlaceholder}><Text style={{fontSize: 14, color: '#4B6396', fontWeight: 'bold'}}>A</Text></View>
+              <View style={styles.avatarPlaceholder}><Text style={{fontSize: 14, color: '#4B6396', fontWeight: 'bold'}}>{user?.name?.charAt(0).toUpperCase() || 'A'}</Text></View>
             </View>
 
             <View style={styles.container}>
@@ -84,10 +84,11 @@ const styles = StyleSheet.create({
     header: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-end',
         paddingHorizontal: 24,
-        paddingTop: 16,
-        paddingBottom: 8,
+        paddingTop: 12,
+        paddingBottom: 4,
+        marginBottom: 0,
     },
     menuIcon: {
         width: 40,

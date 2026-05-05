@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { AuthContext } from "../context/AuthContext";
 import UserHomeScreen from "../screens/user/Homescreen";
 import ApplyScreen from "../screens/user/ApplyScreen";
@@ -21,17 +22,49 @@ function UserTabs() {
           backgroundColor: '#FFF', 
           borderTopWidth: 1, 
           borderTopColor: '#E2E8F0',
-          height: 60,
-          paddingBottom: 5
+          height: 70,
+          elevation: 8,
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: -2 },
+          shadowOpacity: 0.1,
+          shadowRadius: 4,
         },
         tabBarActiveTintColor: '#4B6396',
         tabBarInactiveTintColor: '#718096',
-        tabBarLabelStyle: { fontSize: 12, fontWeight: '600' },
+        tabBarLabelStyle: { 
+          fontSize: 10, 
+          fontWeight: '700', 
+          textTransform: 'none',
+          marginTop: 2,
+          marginBottom: 10,
+        },
+        tabBarIconStyle: {
+          marginTop: 5,
+        },
+        tabBarShowIcon: true,
       }}
     >
-      <Tab.Screen name="Home" component={UserHomeScreen} />
-      <Tab.Screen name="History" component={UserHistoryScreen} />
-      <Tab.Screen name="Profile" component={UserProfileScreen} />
+      <Tab.Screen 
+        name="Home" 
+        component={UserHomeScreen} 
+        options={{
+          tabBarIcon: ({ color }) => <MaterialIcons name="home" size={24} color={color} />
+        }}
+      />
+      <Tab.Screen 
+        name="History" 
+        component={UserHistoryScreen} 
+        options={{
+          tabBarIcon: ({ color }) => <MaterialIcons name="history" size={24} color={color} />
+        }}
+      />
+      <Tab.Screen 
+        name="Profile" 
+        component={UserProfileScreen} 
+        options={{
+          tabBarIcon: ({ color }) => <MaterialIcons name="person" size={24} color={color} />
+        }}
+      />
     </Tab.Navigator>
   );
 }
@@ -46,17 +79,49 @@ function AdminTabs() {
           backgroundColor: '#FFF', 
           borderTopWidth: 1, 
           borderTopColor: '#E2E8F0',
-          height: 60,
-          paddingBottom: 5
+          height: 70,
+          elevation: 8,
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: -2 },
+          shadowOpacity: 0.1,
+          shadowRadius: 4,
         },
         tabBarActiveTintColor: '#4B6396',
         tabBarInactiveTintColor: '#718096',
-        tabBarLabelStyle: { fontSize: 12, fontWeight: '600' },
+        tabBarLabelStyle: { 
+          fontSize: 10, 
+          fontWeight: '700', 
+          textTransform: 'none',
+          marginTop: 2,
+          marginBottom: 10,
+        },
+        tabBarIconStyle: {
+          marginTop: 5,
+        },
+        tabBarShowIcon: true,
       }}
     >
-      <Tab.Screen name="Requests" component={AdminHomeScreen} />
-      <Tab.Screen name="History" component={AdminHistoryScreen} />
-      <Tab.Screen name="Profile" component={AdminProfileScreen} />
+      <Tab.Screen 
+        name="Requests" 
+        component={AdminHomeScreen} 
+        options={{
+          tabBarIcon: ({ color }) => <MaterialIcons name="assignment" size={24} color={color} />
+        }}
+      />
+      <Tab.Screen 
+        name="History" 
+        component={AdminHistoryScreen} 
+        options={{
+          tabBarIcon: ({ color }) => <MaterialIcons name="history" size={24} color={color} />
+        }}
+      />
+      <Tab.Screen 
+        name="Profile" 
+        component={AdminProfileScreen} 
+        options={{
+          tabBarIcon: ({ color }) => <MaterialIcons name="person" size={24} color={color} />
+        }}
+      />
     </Tab.Navigator>
   );
 }

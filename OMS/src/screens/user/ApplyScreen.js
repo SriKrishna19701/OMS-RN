@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, SafeAreaView, KeyboardAvoidingView, ScrollView, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import API from '../../services/api';
+import { AuthContext } from '../../context/AuthContext';
 
 const ApplyScreen = () => {
     const navigation = useNavigation();
+    const { user } = useContext(AuthContext);
     const [reason, setReason] = useState('');
     const [fromDate, setFromDate] = useState('');
     const [toDate, setToDate] = useState('');
 
     const handleApply = async () => {
         try {
-            await API.post('/api/user/apply', { reason, fromDate, toDate });
+            await API.post('/api/user/outpass', { reason, fromDate, toDate });
             Alert.alert('Success', 'Outpass request submitted successfully');
             navigation.goBack();
         } catch (error) {
@@ -22,12 +24,13 @@ const ApplyScreen = () => {
 
     return (
         <SafeAreaView style={styles.safeArea}>
-            <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{flex: 1}}>
+            <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
                 <ScrollView contentContainerStyle={styles.container}>
                     <View style={styles.header}>
-                        <View style={{width: 40}} />
-                        <Text style={styles.headerBrand}>OMS</Text>
-                        <View style={{width: 40}} />
+                        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+                            <Text style={styles.backIconText}>←</Text>
+                        </TouchableOpacity>
+                        <View style={styles.avatarPlaceholder}><Text style={{fontSize: 14, color: '#4B6396', fontWeight: 'bold'}}>{user?.name?.charAt(0).toUpperCase() || 'U'}</Text></View>
                     </View>
 
                     <Text style={styles.eyebrow}>DIGITAL CONCIERGE</Text>
@@ -81,7 +84,6 @@ const ApplyScreen = () => {
                     </View>
 
                     <View style={styles.infoCard}>
-                        <View style={styles.infoIconBox} />
                         <View>
                             <Text style={styles.infoTitle}>Standard Processing</Text>
                             <Text style={styles.infoSubtitle}>Typically approved within 2 hours</Text>
@@ -95,13 +97,16 @@ const ApplyScreen = () => {
 
 const styles = StyleSheet.create({
     safeArea: { flex: 1, backgroundColor: '#F8F9FE' },
-    container: { padding: 24, paddingBottom: 40 },
-    header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 32, paddingTop: 16 },
+    container: { padding: 24, paddingTop: 0, paddingBottom: 40 },
+    header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 0, paddingTop: 12 },
+    backButton: { width: 40, height: 40, justifyContent: 'center' },
+    backIconText: { fontSize: 28, color: '#4B6396', fontWeight: '300' },
+    avatarPlaceholder: { width: 32, height: 32, backgroundColor: '#E2E8F0', borderRadius: 16, justifyContent: 'center', alignItems: 'center' },
     headerBrand: { fontSize: 20, fontWeight: '700', color: '#4B6396' },
     eyebrow: { fontSize: 11, fontWeight: '700', color: '#718096', letterSpacing: 1.5, marginBottom: 8 },
     title: { fontSize: 32, fontWeight: '700', color: '#2D3748', marginBottom: 12 },
     subtitle: { fontSize: 15, color: '#718096', lineHeight: 22, marginBottom: 32 },
-    card: { backgroundColor: '#FFFFFF', borderRadius: 24, padding: 24, shadowColor: '#435585', shadowOpacity: 0.08, shadowOffset: { width:0, height:8 }, shadowRadius: 24, elevation: 5, marginBottom: 24 },
+    card: { backgroundColor: '#FFFFFF', borderRadius: 24, padding: 24, shadowColor: '#435585', shadowOpacity: 0.08, shadowOffset: { width: 0, height: 8 }, shadowRadius: 24, elevation: 5, marginBottom: 24 },
     inputGroup: { marginBottom: 20 },
     label: { fontSize: 13, fontWeight: '700', color: '#4A5568', marginBottom: 8, textTransform: 'uppercase' },
     inputContainer: { backgroundColor: '#F1F3F9', borderRadius: 12, paddingHorizontal: 16, height: 52, justifyContent: 'center' },

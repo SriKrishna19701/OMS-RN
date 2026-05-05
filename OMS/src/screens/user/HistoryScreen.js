@@ -1,9 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { View, Text, FlatList, StyleSheet, SafeAreaView } from 'react-native';
 import API from '../../services/api';
+import { AuthContext } from '../../context/AuthContext';
 
 const HistoryScreen = () => {
     const [requests, setRequests] = useState([]);
+    const { user } = useContext(AuthContext);
 
     const fetchRequests = async () => {
         try {
@@ -20,7 +22,7 @@ const HistoryScreen = () => {
     }, []);
 
     const getStatusColor = (status) => {
-        switch(status?.toLowerCase()) {
+        switch (status?.toLowerCase()) {
             case 'approved': return { bg: '#E6F4EA', text: '#1E4620' };
             case 'rejected': return { bg: '#FCE8E6', text: '#A50E0E' };
             default: return { bg: '#F1F3F9', text: '#4B6396' }; // pending
@@ -30,18 +32,16 @@ const HistoryScreen = () => {
     return (
         <SafeAreaView style={styles.safeArea}>
             <View style={styles.header}>
-              <View style={{width: 40}} />
-              <Text style={styles.headerBrand}>OMS</Text>
-              <View style={styles.avatarPlaceholder}><Text style={{fontSize: 14, color: '#4B6396', fontWeight: 'bold'}}>U</Text></View>
+                <View style={styles.avatarPlaceholder}><Text style={{ fontSize: 14, color: '#4B6396', fontWeight: 'bold' }}>{user?.name?.charAt(0).toUpperCase() || 'U'}</Text></View>
             </View>
 
             <View style={styles.container}>
                 <Text style={styles.title}>Outpass History</Text>
                 <Text style={styles.subtitle}>Review your past and current mobility requests.</Text>
-                
+
                 <FlatList
                     data={requests}
-                    keyExtractor={(item) => item._id.toString()}
+                    keyExtractor={(item) => item._id?.toString() || Math.random().toString()}
                     contentContainerStyle={{ paddingBottom: 20 }}
                     renderItem={({ item }) => {
                         const statusColor = getStatusColor(item.status);
@@ -86,10 +86,11 @@ const styles = StyleSheet.create({
     header: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-end',
         paddingHorizontal: 24,
-        paddingTop: 16,
-        paddingBottom: 8,
+        paddingTop: 12,
+        paddingBottom: 4,
+        marginBottom: 0,
     },
     menuIcon: {
         width: 40,

@@ -8,8 +8,6 @@ const ProfileScreen = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
         <View style={styles.header}>
-            <View style={{width: 40}} />
-            <Text style={styles.headerBrand}>OMS</Text>
             <View style={styles.avatarPlaceholder}><Text style={{fontSize: 14, color: '#4B6396', fontWeight: 'bold'}}>{user?.name?.charAt(0).toUpperCase() || 'A'}</Text></View>
         </View>
 
@@ -44,8 +42,7 @@ const ProfileScreen = () => {
 
 const styles = StyleSheet.create({
   safeArea: { flex: 1, backgroundColor: '#F8F9FE' },
-  header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 24, paddingTop: 16, paddingBottom: 8 },
-  menuIcon: { width: 40, height: 40, justifyContent: 'center', alignItems: 'flex-start' },
+  header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', paddingHorizontal: 24, paddingTop: 12, paddingBottom: 4, marginBottom: 0 },
   headerBrand: { fontSize: 20, fontWeight: '700', color: '#4B6396' },
   avatarPlaceholder: { width: 32, height: 32, backgroundColor: '#E2E8F0', borderRadius: 16, justifyContent: 'center', alignItems: 'center' },
   container: { flex: 1, paddingHorizontal: 24, paddingTop: 16 },
